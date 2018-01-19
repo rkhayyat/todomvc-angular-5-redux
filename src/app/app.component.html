@@ -1,0 +1,20 @@
+<section class="todoapp">
+  <header class="header">
+    <h1>Todos</h1>
+    <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodoRedux()">
+  </header>
+  <section class="main" *ngIf="(todos | async)?.length > 0">
+        <ul class="todo-list">
+      <li *ngFor="let todo of todos | async" [class.completed]="todo.complete">
+        <div class="view">
+          <input class="toggle" type="checkbox" (click)="toggleTodoCompleteRedux(todo)" [checked]="todo.complete">
+          <label>{{todo.title}}</label>
+          <button class="destroy" (click)="removeTodoRedux(todo)"></button>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <footer class="footer" *ngIf="(todos | async)?.length > 0">
+    <span class="todo-count"><strong>{{(todos | async)?.length}}</strong> {{(todos | async)?.length == 1 ? 'item' : 'items'}} left</span>
+  </footer>
+</section>
